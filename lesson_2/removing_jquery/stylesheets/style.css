@@ -1,0 +1,40 @@
+html, body {
+  padding: 25px 0;
+  margin: 0;
+  background: #780e24;
+}
+
+main {
+  display: block;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 25px;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+#result {
+  font: normal 48px monospace ;
+  color: #16997c;
+}
+
+fieldset {
+  border: none;
+}
+
+input[type="number"] {
+  width: 100px;
+  height: 30px;
+  vertical-align: top;
+  font: normal 24px monospace;
+}
+
+select {
+  height: 30px;
+  font: normal 24px monospace;
+}
+
+input[type="submit"] {
+  height: 30px;
+  font: normal 24px monospace;
+}

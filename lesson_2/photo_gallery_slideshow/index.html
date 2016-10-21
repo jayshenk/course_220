@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Photo Gallery with Fluid Layout</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="slideshow.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>My Photo Gallery</h1>
+      <figure>
+        <img src="http://placehold.it/1200x900" alt="Example photo" />
+        <img src="http://placehold.it/1200x900/ffffff/000000" alt="" title=Photo 2 />
+        <img src="http://placehold.it/1200x900/eb7f00/ffffff" alt="" title=Photo 3 />
+        <img src="http://placehold.it/1200x900/225378/ffffff" alt="" title=Photo 4 />
+        <figcaption>Example photo</figcaption>
+      </figure>
+      <div class="controls">
+        <a id="previous" href="#">Previous</a>
+        <a id="next" href="#">Next</a>
+      </div>
+      <ul>
+        <li>
+          <img class="active" src="http://placehold.it/1200x900" alt="" title=Photo 1 />
+        </li>
+        <li>
+          <img src="http://placehold.it/1200x900/ffffff/000000" alt="" title=Photo 2 />
+        </li>
+        <li>
+          <img src="http://placehold.it/1200x900/eb7f00/ffffff" alt="" title=Photo 3 />
+        </li>
+        <li>
+          <img src="http://placehold.it/1200x900/225378/ffffff" alt="" title=Photo 4 />
+        </li>
+      </ul>
+    </main>
+  </body>
+</html>

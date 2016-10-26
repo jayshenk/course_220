@@ -19,7 +19,7 @@ $(function() {
   $("a").on("click", function(e) {
     e.preventDefault();
 
-    $blinds.removeAttr("style");
+    $blinds.finish().removeAttr("style");
     startAnimation();
   });
 

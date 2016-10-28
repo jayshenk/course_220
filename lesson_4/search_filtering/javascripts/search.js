@@ -40,7 +40,8 @@ $(function() {
     "id": 10,
     "category": "Xbox One"
   }];
-  var $categories = $("input[type=checkbox]");
+  var $categories = $(":checkbox");
+  var $games = $("main li");
 
   $categories.change(function() {
     var category = $(this).val();
@@ -49,7 +50,6 @@ $(function() {
     }).map(function(item) {
       return item.id;
     });
-    var $games = $("main li");
 
     $games.filter(function() {
       var id = +$(this).data("id");

@@ -1,0 +1,47 @@
+@import url("whitespace-reset.css");
+
+body {
+  font: normal 16px Helvetica, Arial, sans-serif;
+  background: #eee196;
+}
+
+h1 {
+  padding-bottom: 30px;
+  font-size: 28px;
+}
+
+#page {
+  overflow: hidden;
+  width: 1000px;
+  padding: 20px;
+  margin: 10px auto;
+  background: #fff;
+}
+
+main {
+  float: right;
+  width: 80%;
+  background: #fff;
+}
+
+main li {
+  padding: 15px;
+}
+
+main li:hover {
+  background: #99f099;
+}
+
+main li + li {
+  border-top: 1px solid #ececec;
+}
+
+aside {
+  width: 20%;
+  float: left;
+  background: #fff;
+}
+
+aside ul {
+  padding: 80px 0;
+}

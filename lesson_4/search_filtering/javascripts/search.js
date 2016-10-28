@@ -39,5 +39,21 @@ $(function() {
     "title": "Call of Duty: Advanced Warfare",
     "id": 10,
     "category": "Xbox One"
-  }]
+  }];
+  var $categories = $("input[type=checkbox]");
+
+  $categories.change(function() {
+    var category = $(this).val();
+    var ids = catalog.filter(function(item) {
+      return item.category === category;
+    }).map(function(item) {
+      return item.id;
+    });
+    var $games = $("main li");
+
+    $games.filter(function() {
+      var id = +$(this).data("id");
+      return ids.indexOf(id) !== -1;
+    }).toggle();
+  });
 });

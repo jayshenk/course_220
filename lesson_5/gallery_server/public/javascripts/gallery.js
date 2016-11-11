@@ -22,6 +22,44 @@ $(function() {
     }
   });
 
+  $("#slideshow .prev").on("click", function(e) {
+    e.preventDefault();
+    var $figure = $("#slides figure:visible");
+    var $prev;
+    var id;
+
+    if ($figure.is(":first-child")) {
+      $prev = $("#slides figure:last-child");
+    } else {
+      $prev = $figure.prev();
+    }
+
+    $figure.fadeOut(500);
+    $prev.fadeIn(500);
+    id = $prev.data("id");
+    renderPhotoInformation(id - 1);
+    getCommentsFor(id);
+  });
+
+  $("#slideshow .next").on("click", function(e) {
+    e.preventDefault();
+    var $figure = $("#slides figure:visible");
+    var $next;
+    var id;
+
+    if ($figure.is(":last-child")) {
+      $next = $("#slides figure:first-child");
+    } else {
+      $next = $figure.next();
+    }
+
+    $figure.fadeOut(500);
+    $next.fadeIn(500);
+    id = $prev.data("id");
+    renderPhotoInformation(id - 1);
+    getCommentsFor(id);
+  });
+
   function renderPhotos() {
     $("#slides").html(templates.photos({ photos: photos }));
   }

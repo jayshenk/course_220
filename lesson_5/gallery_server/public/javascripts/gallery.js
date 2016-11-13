@@ -26,6 +26,7 @@ $(function() {
       $current.fadeOut(this.duration);
       $prev.fadeIn(this.duration);
       this.renderPhotoContent($prev.attr("data-id"));
+      actions.init();
     },
     nextSlide: function(e) {
       e.preventDefault();
@@ -33,11 +34,12 @@ $(function() {
       var $next = $current.next("figure");
 
       if (!$next.length) {
-        $next = this.$el.find("figure").first ();
+        $next = this.$el.find("figure").first();
       }
       $current.fadeOut(this.duration);
       $next.fadeIn(this.duration);
       this.renderPhotoContent($next.attr("data-id"));
+      actions.init();
     },
     renderPhotoContent: function(idx) {
       renderPhotoInformation(Number(idx));
@@ -52,6 +54,27 @@ $(function() {
     }
   };
 
+  var actions = {
+    $el: $("section header"),
+    like: function(e) {
+      e.preventDefault();
+      var $like = this.$el.find("a.like");
+      addLike($like.attr("data-id"));
+    },
+    favorite: function(e) {
+      e.preventDefault();
+      var $favorite = this.$el.find("a.favorite");
+      addFavorite($favorite.attr("data-id"));
+    },
+    bind: function() {
+      this.$el.find("a.like").on("click", this.like.bind(this));
+      this.$el.find("a.favorite").on("click", this.favorite.bind(this));
+    },
+    init: function() {
+      this.bind();
+    }
+  };
+
   $.ajax({
     url: "/photos",
     success: function(json) {
@@ -59,6 +82,7 @@ $(function() {
       renderPhotos();
       renderPhotoInformation(photos[0].id);
       slideshow.init();
+      actions.init();
       getCommentsFor(photos[0].id);
     }
   });
@@ -80,6 +104,40 @@ $(function() {
       data: "photo_id=" + idx,
       success: function(comment_json) {
         $("#comments ul").html(templates.comments({ comments: comment_json }));
+      }
+    });
+  }
+
+  function addLike(idx) {
+    $.ajax({
+      url: "/photos/like",
+      data: "photo_id=" + idx,
+      type: "POST",
+      success: function(json) {
+        var photo = photos.filter(function(item) {
+          return item.id === Number(idx);
+        })[0];
+        var $like = $("a.like");
+        var text = $like.text();
+        photo.likes = json.total;
+        $like.text(text.replace(/\d+/, json.total));
+      }
+    });
+  }
+
+  function addFavorite(idx) {
+    $.ajax({
+      url: "/photos/favorite",
+      data: "photo_id=" + idx,
+      type: "POST",
+      success: function(json) {
+        var photo = photos.filter(function(item) {
+          return item.id === Number(idx);
+        })[0];
+        var $favorite = $("a.favorite");
+        var text = $favorite.text();
+        photo.favorites = json.total;
+        $favorite.text(text.replace(/\d+/, json.total));
       }
     });
   }

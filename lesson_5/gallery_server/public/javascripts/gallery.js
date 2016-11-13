@@ -42,6 +42,7 @@ $(function() {
       actions.init();
     },
     renderPhotoContent: function(idx) {
+      $("[name=photo_id]").val(idx);
       renderPhotoInformation(Number(idx));
       getCommentsFor(idx);
     },
@@ -85,6 +86,20 @@ $(function() {
       actions.init();
       getCommentsFor(photos[0].id);
     }
+  });
+
+  $("#comments form").on("submit", function(e) {
+    e.preventDefault();
+    var $f = $(this);
+
+    $.ajax({
+      url: $f.attr("action"),
+      data: $f.serialize(),
+      type: $f.attr("method"),
+      success: function(comment_json) {
+        $("#comments ul").append(templates.comment(comment_json));
+      }
+    });
   });
 
   function renderPhotos() {

@@ -1,5 +1,5 @@
 body {
-  background: #B4DBFF;
+  background: #b4dbff;
   font: normal 16px Helvetica, Arial, sans-serif;
 }
 
@@ -55,7 +55,7 @@ nav li {
 nav a {
   display: block;
   padding: 15px;
-  background: #989AE8;
+  background: #989ae8;
   border-radius: 10px 10px 0 0;
 }
 

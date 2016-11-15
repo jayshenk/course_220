@@ -2,6 +2,7 @@ $(function() {
 
   var tabIndex = localStorage.tabIndex;
   var background = localStorage.background;
+  var notes = localStorage.notes;
 
   if (tabIndex) {
     changeTabs(tabIndex);
@@ -9,6 +10,10 @@ $(function() {
 
   if (background) {
     $("body").css("background", background);
+  }
+
+  if (notes) {
+    $("textarea").val(notes);
   }
 
   $("nav a").on("click", function(e) {
@@ -24,6 +29,10 @@ $(function() {
 
     $("body").css("background", background);
     localStorage.setItem("background", background);
+  });
+
+  $(window).on("unload", function() {
+    localStorage.notes = $("textarea").val();
   });
 
   function changeTabs(index) {

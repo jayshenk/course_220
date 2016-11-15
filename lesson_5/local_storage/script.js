@@ -1,9 +1,14 @@
 $(function() {
 
   var tabIndex = localStorage.tabIndex;
+  var background = localStorage.background;
 
   if (tabIndex) {
     changeTabs(tabIndex);
+  }
+
+  if (background) {
+    $("body").css("background", background);
   }
 
   $("nav a").on("click", function(e) {
@@ -12,6 +17,13 @@ $(function() {
     tabIndex = $("nav a").index($e);
 
     changeTabs(tabIndex);
+  });
+
+  $("input[name=background]").on("change", function() {
+    background = $(":checked").val();
+
+    $("body").css("background", background);
+    localStorage.setItem("background", background);
   });
 
   function changeTabs(index) {

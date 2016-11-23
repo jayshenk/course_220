@@ -1,4 +1,29 @@
 (function() {
+
+  var findObjs = function(element, props, multiple) {
+    var match = multiple ? [] : undefined;
+
+    element.some(function(obj) {
+      var allMatch = true;
+      for (var prop in props) {
+        if (!(prop in obj) || obj[prop] !== props[prop]) {
+          allMatch = false;
+        }
+      }
+
+      if (allMatch) {
+        if (multiple) {
+          match.push(obj);
+        } else {
+          match = obj;
+          return true;
+        }
+      }
+    });
+
+    return match;
+  }
+
   var _ = function(element) {
     u = {
       first: function() {
@@ -49,6 +74,68 @@
         }
 
         return sampled;
+      },
+      findWhere: function(props) {
+        return findObjs(element, props, false);
+      },
+      where: function(props) {
+        return findObjs(element, props, true);
+      },
+      pluck: function(query) {
+        var vals = [];
+
+        element.forEach(function(obj) {
+          if (obj[query]) {
+            vals.push(obj[query]);
+          }
+        });
+
+        return vals;
+      },
+      keys: function() {
+        var keys = [];
+
+        for (var prop in element) {
+          keys.push(prop);
+        }
+
+        return keys;
+      },
+      values: function() {
+        var vals = [];
+
+        for (var prop in element) {
+          vals.push(element[prop]);
+        }
+
+        return vals;
+      },
+      pick: function() {
+        var args = [].slice.call(arguments);
+        var picked = {};
+
+        args.forEach(function(arg) {
+          if (element[arg]) {
+            picked[arg] = element[arg];
+          }
+        });
+
+        return picked;
+      },
+      omit: function() {
+        var args = [].slice.call(arguments);
+        var newObj = {};
+
+        args.forEach(function(arg) {
+          if (!element[arg]) {
+            newObj[arg] = element[arg];
+          }
+        });
+
+        return newObj;
+      },
+      has: function(prop) {
+        return {}.hasOwnProperty.call(element, prop);
       }
     };
 
@@ -67,6 +154,18 @@
     }
 
     return range;
+  };
+
+  _.extend = function() {
+    var args = [].slice.call(arguments);
+    var oldObj = args.pop();
+    var newObj = args[args.length - 1];
+
+    for (var prop in oldObj) {
+      newObj[prop] = oldObj[prop];
+    }
+
+    return args.length === 1 ? newObj : _.extend.apply(_, args);
   };
 
   window._ = _;

@@ -14,6 +14,9 @@ var randomWord = function() {
 }();
 
 var Game = {
+  incorrect: 0,
+  maxWrongGuesses: 6,
+
   createBlanks: function() {
     var spaces = (new Array(this.word.length + 1)).join('<span></span>');
 
@@ -95,9 +98,7 @@ var Game = {
       this.displayMessage('Sorry, I\'ve run out of words!');
     }
     this.word = this.word.split('');
-    this.incorrect = 0;
     this.lettersGuessed = [];
-    this.maxWrongGuesses = 6;
     this.createBlanks();
     this.bindEvents();
     return this;

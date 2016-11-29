@@ -42,7 +42,7 @@ main {
   position: relative;
   width: 678px;
   height: 517px;
-  margin: 0 auto 60px auto;
+  margin: 0 auto;
   background: url("../images/tree.png") 0 0 no-repeat;
 }
 
@@ -73,6 +73,10 @@ p {
   font-size: 20px;
 }
 p:empty {
+  display: none;
+}
+
+#replay {
   display: none;
 }
 
